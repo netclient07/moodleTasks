@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>result</title>
+  </head>
+  <body>
+    <h4>alkarimova</h4>
+
+    <script>
+      const raw = decodeURIComponent(window.location.search.slice(1));
+      const arr = JSON.parse(raw);
+      arr.sort((a, b) => a - b);
+      document.title = arr.toString();
+    </script>
+  </body>
+</html>
