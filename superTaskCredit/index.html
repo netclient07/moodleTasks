@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>result</title>
+  </head>
+  <body>
+    <h4>alkarimova</h4>
+
+    <script>
+      const query = location.search.slice(1);
+      const parts = query.split('&');
+
+      const getValue = key => {
+        const item = parts.find(part => part.indexOf(key + '=') === 0);
+        return item ? item.slice(key.length + 1) : '';
+      };
+
+      const seriesA = getValue('A').split(',').map(Number);
+      const seriesB = getValue('B').split(',').map(Number);
+
+      const n = Math.min(seriesA.length, seriesB.length);
+
+      let sumA = 0;
+      let sumB = 0;
+      let sumAB = 0;
+      let sumA2 = 0;
+      let sumB2 = 0;
+
+      for (let i = 0; i < n; i += 1) {
+        const a = seriesA[i];
+        const b = seriesB[i];
+        sumA += a;
+        sumB += b;
+        sumAB += a * b;
+        sumA2 += a * a;
+        sumB2 += b * b;
+      }
+
+      const numerator = n * sumAB - sumA * sumB;
+      const denominator = Math.sqrt(
+        (n * sumA2 - sumA * sumA) * (n * sumB2 - sumB * sumB)
+      );
+
+      let result = '0.000';
+
+      if (denominator !== 0) {
+        const value = Math.abs(numerator / denominator);
+
+        if (value >= 1) {
+          result = '1';
+        } else {
+          const truncated = Math.floor(value * 1000) / 1000;
+          result = truncated.toFixed(3);
+        }
+      }
+
+      document.title = result;
+    </script>
+  </body>
+</html>
