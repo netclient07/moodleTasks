@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task24</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <article></article>
+    <h4>alkarimova</h4>
+    <button id="bt" type="button">Создать DIV</button>
+
+    <script>
+      document.getElementById('bt').addEventListener('click', () => {
+        const article = document.querySelector('article');
+
+        if (article.children.length > 0) return;
+
+        const fragment = document.createDocumentFragment();
+
+        for (let i = 0; i < 1000; i += 1) {
+          const div = document.createElement('div');
+          div.id = `i${i}`;
+          fragment.appendChild(div);
+        }
+
+        article.appendChild(fragment);
+      });
+    </script>
+  </body>
+</html>
